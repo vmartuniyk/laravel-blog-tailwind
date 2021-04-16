@@ -20,6 +20,4 @@
 1. Запустити сервер командою `php artisan serve`
 
 ### Доступ до сайту
-1. Логін `doe@template.com`
-2. Пароль `doepassword`
-3. [Сайт Blog на сервері](http://blog.martuniyk.space)
+1. [Сайт Blog на сервері](http://blog.martuniyk.space)
