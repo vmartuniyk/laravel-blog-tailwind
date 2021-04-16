@@ -16,5 +16,10 @@
     ```
 1. Запустити команду `php artisan storage:link`
 1. [Встановлення frontend залежностей](https://docs.npmjs.com/cli/install)  `npm install`
-1. Зупустити командою `npm run dev`
+1. Запустити командою `npm run dev`
 1. Запустити сервер командою `php artisan serve`
+
+### Доступ до сайту
+1. Логін `doe@template.com`
+2. Пароль `doepassword`
+ [Сайт Blog на сервері](http://blog.martuniyk.space)
