@@ -22,4 +22,4 @@
 ### Доступ до сайту
 1. Логін `doe@template.com`
 2. Пароль `doepassword`
- [Сайт Blog на сервері](http://blog.martuniyk.space)
+3. [Сайт Blog на сервері](http://blog.martuniyk.space)
