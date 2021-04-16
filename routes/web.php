@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +17,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::middleware('auth')->group(function() {
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('posts', PostController::class);
+    Route::get('/search', 'PostController@search')->name('posts.search');
+});

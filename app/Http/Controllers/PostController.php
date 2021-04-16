@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::latest()->paginate(10);
+
+        return view('index',compact('posts'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -35,7 +37,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:3'],
+            'category' => ['required', 'min:3'],
+            'image' => 'file'
+        ]);
+        
+        if(request('image')) {
+            $attributes['image'] = request('image')->store('images');
+        }
+
+        Post::create($attributes);
+
+        return redirect(route('posts.index'));
+
     }
 
     /**
@@ -46,7 +62,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show',compact('post'));
     }
 
     /**
@@ -57,7 +73,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -69,7 +86,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+       
+        $attributes = request()->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:3'],
+            'category' => ['required', 'min:3'],
+            'image' => 'file'
+        ]);
+        
+        if(request('image')) {
+            $attributes['image'] = request('image')->store('images');
+        }
+        $post->update($attributes);
+        // $post->update($this->validatePost());
+        
+        return redirect(route('posts.index'));
     }
 
     /**
@@ -80,6 +111,34 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index');
+
+    }
+
+    public function search(Request $request) {
+
+        $search = $request->get('search');
+
+        $posts = Post::where('title', 'like', '%'.$search.'%')->paginate(10);
+
+        return view('index', compact('posts'));
+
+    }
+
+    protected function validatePost(){
+        return $attributes = request()->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:3'],
+            'category' => ['required', 'min:3'],
+            'image' => 'file'
+            ]);
+            if(request('image')) {
+                dd('asdasdsd');
+                $attributes['image'] = request('image')->store('images');
+            }
+            
+            
     }
 }
